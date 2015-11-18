@@ -6,6 +6,7 @@ module.exports=function(options) {
   var deviceConfigurationNode = function (options) {}
 
  deviceConfigurationNode.prototype = function (options) {
+     this.fullName=options.fullName || "static";
      this.deviceType = options.deviceType || "home-automation";
      this.deviceName = options.deviceName || "jibreel";
      this.deviceModel =  options.deviceModel || "static";

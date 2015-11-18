@@ -24,7 +24,7 @@ module.exports=function(){
         this.node = nodes["base"];
         break;
       case "device":
-        this.node = nodes["device"];
+        this.node = fractals.execute(nodes["device"](options));
         break;
       case undefined:
         this.node = nodes["base"];

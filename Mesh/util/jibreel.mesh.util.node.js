@@ -15,14 +15,15 @@ exports.utils=function(app,promisifier,db,crypto) {
   }
 
   function save(node){
-    return  promisifier.when( db.redis.set("node--"+crypto.createHash('md5').update(node.fullName).digest("hex"),JSON.stringify(node))).then(
-      console.log("sucsessfully saved the node with id : node--"+node.id+" !"),
-      console.log(node)
-    ).catch(
-      function(reason){
-        console.log('Handle rejected promise ('+reason+') here.');
-      }
-    )
+    if(node.fullName) {
+      return promisifier.when(db.redis.set("node--" + crypto.createHash('md5').update(node.fullName).digest("hex"), JSON.stringify(node))).then(
+        console.log("sucsessfully saved the node with id : node--" + node.id + " !")
+      ).catch(
+        function (reason) {
+          console.log('Handle rejected promise (' + reason + ') here.');
+        }
+      )
+    }
   }
 
   function validate(node){

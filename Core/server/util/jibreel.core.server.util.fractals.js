@@ -5,6 +5,12 @@ module.exports =  {
       source.prototype.call(this,arguments);
     };
     return src;
+  },
+  execute:function (source) {
+    var src = function(){
+      source.prototype.call(this,arguments);
+    };
+    return src;
   }
 
 };

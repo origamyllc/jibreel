@@ -1,0 +1,26 @@
+{
+  "exchanges":[{
+     "id":1,
+     "name":"jibreel.exchange.home",
+     "options":{"type": "direct"}
+  }],
+  "queues":[{
+    "id":2,
+    "name":"jibreel.queue.thermostat",
+    "options":{},
+    "binding": {
+      "exchange": "jibreel.exchange.home",
+      "key": "jibreel.thermostat"
+    }
+   },
+    {
+      "id":3,
+      "name":"jibreel.queue.smokealarm",
+      "options":{},
+      "binding": {
+        "exchange": "jibreel.exchange.home",
+        "key": "jibreel.smokealarm"
+      }
+    }
+  ]
+}

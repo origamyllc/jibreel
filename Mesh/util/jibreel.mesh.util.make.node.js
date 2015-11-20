@@ -3,8 +3,9 @@
  */
 exports.utils=function(app,promisifier,db,crypto) {
 
-  function validateNode(node){
+  Utils=this;
 
+  Utils.validateNode=function (node){
     if(node.name === 'static'){
       throw "Please pass the node name as an option !"
     }
@@ -14,9 +15,9 @@ exports.utils=function(app,promisifier,db,crypto) {
     return node;
   }
 
-  function save(node){
+  Utils.save = function (node){
     if(node.fullName) {
-      return promisifier.when(db.redis.set("node--" + crypto.createHash('md5').update(node.fullName).digest("hex"), JSON.stringify(node))).then(
+      return promisifier.when(Utils.persist(node)).then(
         console.log("sucsessfully saved the node with id : node--" + node.id + " !")
       ).catch(
         function (reason) {
@@ -26,9 +27,18 @@ exports.utils=function(app,promisifier,db,crypto) {
     }
   }
 
-  function validate(node){
-    promisifier.when(validateNode(node)).then(
-      save(node)
+  Utils.persist=function (node){
+    if(node.db === "sql"){
+     // insert everything except db
+     // db.sql.insert();
+    }
+
+    db.redis.set("node--" + crypto.createHash('md5').update(node.fullName).digest("hex"), JSON.stringify(node));
+  }
+
+  Utils.validate=function (node){
+    promisifier.when(Utils.validateNode(node)).then(
+      Utils.save(node)
     ).catch(
       function(reason) {
         console.log('Handle rejected promise ('+reason+') here.');
@@ -36,6 +46,6 @@ exports.utils=function(app,promisifier,db,crypto) {
   }
 
  return{
-   saveNode:validate
+   saveNode:Utils.validate
  }
 }

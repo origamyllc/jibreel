@@ -24,12 +24,13 @@ module.exports=function(){
         this.node = nodes["base"];
         break;
       case "device":
-        this.node = fractals.execute(nodes["device"](options));
+        this.node = fractals.extend(function (){this.db="sql"},nodes["device"](options));
         break;
       case undefined:
         this.node = nodes["base"];
         break;
     }
+
     return  this.node;
   };
 

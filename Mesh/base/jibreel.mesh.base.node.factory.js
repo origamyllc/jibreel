@@ -37,6 +37,7 @@ var NODE = (function(maker) {
           break;
       }
 
+
       //create an instance
       var node = new this.node();
 
@@ -46,6 +47,8 @@ var NODE = (function(maker) {
           node[key] = options[key];
         }
       });
+
+      console.log(node);
 
       return node;
     }

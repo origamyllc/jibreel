@@ -1,16 +1,18 @@
 module.exports =  {
-  extend : function (destination, source) {
+  extend : function (firstClass, secondClass) {
     var src = function(){
-      destination.call(this,arguments);
-      source.prototype.call(this,arguments);
+      firstClass.call(this,arguments);
+      secondClass.prototype.call(this,arguments);
     };
     return src;
   },
-  execute:function (source) {
+  execute:function (self) {
     var src = function(){
-      source.prototype.call(this,arguments);
+      self.prototype.call(this,arguments);
     };
     return src;
-  }
+  },
+  mix:function (obj1,obj2){
 
+  }
 };

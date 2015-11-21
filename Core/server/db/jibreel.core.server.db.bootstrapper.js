@@ -16,6 +16,7 @@ exports.bootstrap = function( app, promisifier) {
   var sql = require('./sql/jibreel.core.server.db.sql.factory').SQL;
   sql.connect('mysql://jibreel:gerbil@localhost/test');
 
+
    return {
      redis:redis,
      mongo:mongo,

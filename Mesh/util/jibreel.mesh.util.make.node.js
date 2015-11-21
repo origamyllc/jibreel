@@ -28,12 +28,26 @@ exports.utils=function(app,promisifier,db,crypto) {
   }
 
   Utils.persist=function (node){
+
     if(node.db === "sql"){
-     // insert everything except db
-     // db.sql.insert();
+
+      var obj={'UID':node.id ,
+        'deviceType': node.deviceType ,
+        'deviceName': node.deviceName ,
+        'deviceFullName':node.fullName,
+        'deviceModel':node.deviceModel,
+        'deviceIpVersion':4,
+        'deviceBrand':node.deviceBrand,
+        'deviceIP':node.deviceIP,
+        'deviceMAC': node.deviceMAC,
+        'createdAt': new Date().toString()
+      };
+
+       db.sql.insert(node.schema,obj);
     }
 
-    db.redis.set("node--" + crypto.createHash('md5').update(node.fullName).digest("hex"), JSON.stringify(node));
+    db.redis.set(node.fullName , JSON.stringify(node));
+
   }
 
   Utils.validate=function (node){

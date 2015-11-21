@@ -3,13 +3,16 @@
 module.exports = function(db) {
 
   var Device = db.define("device",  {
-    deviceUID:{ type: 'integer' },
+    UID:{ type: 'integer' },
     deviceType:String,
     deviceName :String,
+    deviceFullName:String,
     deviceBrand :String,
+    deviceModel:String,
     deviceIP:String,
+    deviceIpVersion:String,
     deviceMAC:String,
-    created:String
+    createdAt:String
   });
 
   return Device;

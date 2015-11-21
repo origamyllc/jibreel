@@ -81,11 +81,7 @@ create:[
 
   /**
    *
-   *  var obj={'deviceType':'nanchako','deviceName':'nanchakoo','deviceBrand':'none','deviceIP':'127.0.0.0','deviceMAC':'mac adress','created':'today'};
-
-   sql.getCollections();
-
-   //  sql.insert("DeviceSchema",obj);
+   var obj={'UID':'universal-id','deviceType':'nanchako','deviceName':'nanchakoo','deviceFullName':'nanchakoo','deviceModel':'basic-bitch','deviceIpVersion':4,'deviceBrand':'none','deviceIP':'127.0.0.0','deviceMAC':'mac adress','createdAt':'today'};
 
    sql.update("DeviceSchema",obj);
 

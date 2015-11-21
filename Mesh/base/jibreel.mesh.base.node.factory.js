@@ -48,8 +48,6 @@ var NODE = (function(maker) {
         }
       });
 
-      console.log(node);
-
       return node;
     }
 

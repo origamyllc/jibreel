@@ -37,10 +37,13 @@ exports.utils=function(app,promisifier,db,crypto) {
   }
 
   Utils.persist=function (node){
-    if(node.db === "sql") {
+    if(node.db === "sql" && nodes[node.schema]) {
       db.sql.insert(node.schema, nodes[node.schema](node));
+      db.redis.set(node.fullName , JSON.stringify( nodes[node.schema](node)));
     }
-    db.redis.set(node.fullName , JSON.stringify(node));
+    else {
+      db.redis.set(node.fullName, JSON.stringify(node));
+    }
   }
 
   Utils.validate=function (node){

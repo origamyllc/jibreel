@@ -3,6 +3,15 @@
  */
 exports.utils=function(app,promisifier,db,crypto) {
 
+
+  var path=require('path'),fs=require('fs'),nodes={};
+  var transformerPath = path.join(__dirname, '../transformers');
+
+  fs.readdirSync(transformerPath).forEach(function(file) {
+    var fileNameArray=file.split('.');
+    nodes[fileNameArray[fileNameArray.length-2]]=require(transformerPath + '/' + file);
+  });
+
   Utils=this;
 
   Utils.validateNode=function (node){
@@ -28,26 +37,10 @@ exports.utils=function(app,promisifier,db,crypto) {
   }
 
   Utils.persist=function (node){
-
-    if(node.db === "sql"){
-
-      var obj={'UID':node.id ,
-        'deviceType': node.deviceType ,
-        'deviceName': node.deviceName ,
-        'deviceFullName':node.fullName,
-        'deviceModel':node.deviceModel,
-        'deviceIpVersion':4,
-        'deviceBrand':node.deviceBrand,
-        'deviceIP':node.deviceIP,
-        'deviceMAC': node.deviceMAC,
-        'createdAt': new Date().toString()
-      };
-
-       db.sql.insert(node.schema,obj);
+    if(node.db === "sql") {
+      db.sql.insert(node.schema, nodes[node.schema](node));
     }
-
     db.redis.set(node.fullName , JSON.stringify(node));
-
   }
 
   Utils.validate=function (node){

@@ -52,8 +52,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
     }
   };
 
-})(registry.base,registry.fractals,registry.path,registry.fs,registry.configUtil);
-
+})(registry.baseNode,registry.fractals,registry.path,registry.fs,registry.configUtil);
 
 
 module.exports.CONFIG_HELPER = CONFIG_HELPER.getInstance();

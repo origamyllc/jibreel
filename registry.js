@@ -18,7 +18,7 @@ exports.get=function() {
     fractals: fractals,
     make: configHelper,
     configUtil:configUtil,
-    baseNode: base,
+    baseNode : base,
     nodeFactory: nodeFactory,
     uuid: uuid,
     path:path,

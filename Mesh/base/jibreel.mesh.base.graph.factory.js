@@ -20,7 +20,6 @@ var GRAPH = (function(nodeFactory,redis) {
        },
        readNode:function(fullName,callback){
          redis.get(fullName,function(result){
-           console.log(result);
            return callback(result);
          })
        },

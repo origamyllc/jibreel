@@ -19,7 +19,7 @@ module.exports = function(app,promisifier,util,Factory) {
       },
      readNode:function(){
        app.post('/mesh/read/node', function (req, res) {
-         Factory.readNode(req.body.options , function (node) {
+         Factory.readNode(req.body.options.fullName , function (node) {
            res.status(200).send(node)
          });
        });

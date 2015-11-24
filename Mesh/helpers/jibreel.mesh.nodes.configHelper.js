@@ -6,14 +6,19 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
   var instance,nodes={};
 
   var configPath = path.join(__dirname, '../nodes/config');
+  var collectorPath = path.join(__dirname, '../nodes/collector');
 
   nodes["base"]=base;
 
-  fs.readdirSync(configPath).forEach(function(file) {
-    var fileNameArray=file.split('.');
-    nodes[fileNameArray[fileNameArray.length-2]]=require(configPath + '/' + file);
-  });
+  bootstrapFoldersAtPath(configPath);
+ // bootstrapFoldersAtPath(collectorPath);
 
+  function bootstrapFoldersAtPath(path){
+    fs.readdirSync(path).forEach(function(file) {
+      var fileNameArray=file.split('.');
+      nodes[fileNameArray[fileNameArray.length-2]]=require(configPath + '/' + file);
+    });
+  }
 
   function init() {
 
@@ -27,6 +32,9 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
           break;
         case "device":
           this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
+          break;
+        case "collector":
+         // this.node = fractals.extend(function (){this.src-="sql",this.schema="device"},nodes["device"](options));
           break;
         case undefined:
           this.node = nodes["base"];

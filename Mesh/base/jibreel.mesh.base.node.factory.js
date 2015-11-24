@@ -75,8 +75,6 @@ var NODE = (function(maker) {
 
 })(registry.make);
 
-
-
 module.exports.NODE= NODE.getInstance();
 
 

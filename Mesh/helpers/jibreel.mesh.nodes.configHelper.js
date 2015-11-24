@@ -1,12 +1,15 @@
-/**
- * Created by prashun on 11/17/15.
- */
-module.exports=function(){
+var registry=require("../../registry").get();
+
+
+var CONFIG_HELPER = (function(base,fractals) {
+
+  // our instance holder
+  var instance,models={};
+
 
   var path=require('path'),fs=require('fs'),nodes={};
   var configPath = path.join(__dirname, '../nodes/config');
-  var base =require("./../nodes/jibreel.mesh.nodes.base.js");
-  var fractals = require('../../Core/server/util/jibreel.core.server.util.fractals.js');
+  var util = require('../util/jibreel.mesh.util.configHelperUtils');
 
   nodes["base"]=base;
 
@@ -14,6 +17,7 @@ module.exports=function(){
     var fileNameArray=file.split('.');
     nodes[fileNameArray[fileNameArray.length-2]]=require(configPath + '/' + file);
   });
+
 
   function createConfiguration(options){
     switch (options.subType) {
@@ -33,12 +37,33 @@ module.exports=function(){
     return  this.node;
   };
 
-function readNode(fullName){
-
-
-}
-  return{
-    make:createConfiguration,
-    read:readNode
+  function readNode(fullName){
+    util.readNode(fullName);
   }
-}
+
+
+  // Instance stores a reference to the Singleton
+  function init() {
+    return{
+      make:createConfiguration,
+      read:readNode
+    }
+  }
+
+
+  return {
+    // Get the Singleton instance if one exists
+    // or create one if it doesn't
+    getInstance: function() {
+      if (!instance) {
+        instance = init();
+      }
+      return instance;
+    }
+  };
+
+})(registry.base,registry.fractals);
+
+module.exports.CONFIG_HELPER = CONFIG_HELPER.getInstance();
+
+

@@ -62,12 +62,12 @@ exports.utils=function(app,promisifier,db) {
     // if exists return from lru
     // if not get from redis
     // set in lru
-    console.log(db);
+
 
     return db.redis.get(fullName,function(reply){
       promisifier.when(reply).then(
         function(value){
-          console.log(value)
+          console.log(value);
           return value;
         }
       ).catch(

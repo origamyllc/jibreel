@@ -3,7 +3,6 @@
  */
 exports.utils=function(app,promisifier,db) {
 
-
   var path=require('path'),fs = require('fs'),nodes={};
   var transformerPath = path.join(__dirname, '../transformers');
 
@@ -58,12 +57,6 @@ exports.utils=function(app,promisifier,db) {
   }
 
   Utils.readNode = function(fullName){
-    // see if exixts in lru
-    // if exists return from lru
-    // if not get from redis
-    // set in lru
-
-
     return db.redis.get(fullName,function(reply){
       promisifier.when(reply).then(
         function(value){
@@ -75,7 +68,6 @@ exports.utils=function(app,promisifier,db) {
           console.log('Handle rejected promise ('+reason+') here.');
         })
     })
-
   }
 
  return{

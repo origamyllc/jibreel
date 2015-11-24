@@ -53,7 +53,7 @@ var NODE = (function(maker) {
 
 
     nodeFactory.prototype.readNode = function ( fullName ) {
-      if(typeof maker !== "undefined") {
+     if(typeof maker !== "undefined" && typeof maker.read(fullName) !== "undefined") {
         return maker.read(fullName);
       }
     }

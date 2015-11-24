@@ -1,15 +1,11 @@
 var registry=require("../../registry").get();
 
 
-var CONFIG_HELPER = (function(base,fractals) {
+var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
 
-  // our instance holder
-  var instance,models={};
+  var instance,nodes={};
 
-
-  var path=require('path'),fs=require('fs'),nodes={};
   var configPath = path.join(__dirname, '../nodes/config');
-  var util = require('../util/jibreel.mesh.util.configHelperUtils');
 
   nodes["base"]=base;
 
@@ -19,31 +15,32 @@ var CONFIG_HELPER = (function(base,fractals) {
   });
 
 
-  function createConfiguration(options){
-    switch (options.subType) {
-      case "temperature":
-        this.node = fractals.extend(nodes["base"](options),nodes["temperature"](options));
-        break;
-      case "smoke-alarm":
-        this.node = nodes["base"];
-        break;
-      case "device":
-        this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
-        break;
-      case undefined:
-        this.node = nodes["base"];
-        break;
-    }
-    return  this.node;
-  };
-
-  function readNode(fullName){
-    util.readNode(fullName);
-  }
-
-
-  // Instance stores a reference to the Singleton
   function init() {
+
+    function createConfiguration(options){
+      switch (options.subType) {
+        case "temperature":
+          this.node = fractals.extend(nodes["base"](options),nodes["temperature"](options));
+          break;
+        case "smoke-alarm":
+          this.node = nodes["base"];
+          break;
+        case "device":
+          this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
+          break;
+        case undefined:
+          this.node = nodes["base"];
+          break;
+      }
+      return  this.node;
+    };
+
+    function readNode(fullName){
+      if(typeof helper.readNode(fullName) !== 'undefined' ) {
+        return helper.readNode(fullName);
+      }
+    }
+
     return{
       make:createConfiguration,
       read:readNode
@@ -52,17 +49,18 @@ var CONFIG_HELPER = (function(base,fractals) {
 
 
   return {
-    // Get the Singleton instance if one exists
-    // or create one if it doesn't
     getInstance: function() {
       if (!instance) {
         instance = init();
       }
+
       return instance;
     }
   };
 
-})(registry.base,registry.fractals);
+})(registry.base,registry.fractals,registry.path,registry.fs,registry.configUtil);
+
+
 
 module.exports.CONFIG_HELPER = CONFIG_HELPER.getInstance();
 

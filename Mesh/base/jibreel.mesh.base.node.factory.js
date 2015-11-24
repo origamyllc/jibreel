@@ -6,7 +6,6 @@ var registry= require("../../registry").get();
 
 var NODE = (function(maker) {
 
-  // our instance holder
   var instance;
 
   function init() {
@@ -35,8 +34,9 @@ var NODE = (function(maker) {
           break;
         case "commute":
           break;
+        case "collector":
+          break;
       }
-
 
       //create an instance
       var node = new this.node();
@@ -49,6 +49,13 @@ var NODE = (function(maker) {
       });
 
       return node;
+    }
+
+
+    nodeFactory.prototype.readNode = function ( fullName ) {
+      if(maker.read(fullName)) {
+        return maker.read(fullName);
+      }
     }
 
     return  new nodeFactory();

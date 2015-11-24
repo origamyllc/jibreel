@@ -31,7 +31,7 @@ var primus = new Primus(server, {
 require('./Core/server/config/jibreel.core.server.config.express')(app,bodyParser,errorHandler,favicon,cookieParser,methodOverride,session,RedisStore,logger,cors,useragent);
 
 //setup db
-var db=require('./Core/server/db/jibreel.core.server.db.bootstrapper').bootstrap(app,promisifier);
+var db=require('./Core/server/db/jibreel.core.server.db.bootstrapper').bootstrap();
 
 //setup helot
 require('./Helot/jibreel.helot.bootstrapper').bootstrap(app,promisifier,{"server":server,"port":port});

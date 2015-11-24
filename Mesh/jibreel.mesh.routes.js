@@ -17,7 +17,14 @@ module.exports = function(app,promisifier,util) {
             )
           });
         });
-      }
+      },
+     readNode:function(){
+       app.post('/mesh/read/node', function (req, res) {
+         Factory.readNode('nanchakoo', function (node) {
+           res.status(200).send(node)
+         });
+       });
+     }
   }
   return obj;
 }

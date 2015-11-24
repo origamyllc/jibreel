@@ -4,9 +4,9 @@
 module.exports=function(){
 
   var path=require('path'),fs=require('fs'),nodes={};
-  var configPath = path.join(__dirname, './config');
-  var base =require("./jibreel.mesh.nodes.base");
-  var fractals = require('../../Core/server/util/jibreel.core.server.util.fractals');
+  var configPath = path.join(__dirname, '../nodes/config');
+  var base =require("./../nodes/jibreel.mesh.nodes.base.js");
+  var fractals = require('../../Core/server/util/jibreel.core.server.util.fractals.js');
 
   nodes["base"]=base;
 
@@ -30,11 +30,15 @@ module.exports=function(){
         this.node = nodes["base"];
         break;
     }
-
     return  this.node;
   };
 
+function readNode(fullName){
+
+
+}
   return{
-    make:createConfiguration
+    make:createConfiguration,
+    read:readNode
   }
 }

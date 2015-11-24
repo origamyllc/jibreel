@@ -11,7 +11,7 @@ var REDIS = (function() {
   function init() {
     return {
       get: function (key,callback) {
-        client.get(key, function (err, reply) {
+        client.get("nanchakoo", function (err, reply) {
            return callback(reply);
         });
       },

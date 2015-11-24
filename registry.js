@@ -4,14 +4,14 @@
 
 exports.get=function() {
   var fractals = require('./Core/server/util/jibreel.core.server.util.fractals');
-  var make = require('./Mesh/nodes/jibreel.mesh.nodes.make')();
+  var helper = require('./Mesh/helpers/jibreel.mesh.nodes.configHelper.js')();
   var base = require('./Mesh/nodes/jibreel.mesh.nodes.base');
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
   var uuid = require('node-uuid');
 
  return {
     fractals: fractals,
-    make: make,
+    make: helper,
     baseNode: base,
     nodeFactory: nodeFactory,
     uuid: uuid

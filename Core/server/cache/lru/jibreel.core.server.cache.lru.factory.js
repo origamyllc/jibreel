@@ -26,9 +26,6 @@ var LRU = (function() {
           a.push(value);
           return a
         });
-      },
-      size:function(){
-
       }
     }
   }

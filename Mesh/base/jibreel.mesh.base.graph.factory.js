@@ -18,8 +18,9 @@ var GRAPH = (function(nodeFactory) {
            node.id=uuid.v4();
            callback(node);
        },
-       readNode:function(name){
-
+       readNode:function(name,callback){
+         var node =nodeFactory.readNode(name);
+         callback(node);
        },
        updateNode:function(name){
 

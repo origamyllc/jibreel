@@ -35,15 +35,9 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
       return  this.node;
     };
 
-    function readNode(fullName){
-      if(typeof helper.readNode(fullName) !== 'undefined' ) {
-        return helper.readNode(fullName);
-      }
-    }
 
     return{
-      make:createConfiguration,
-      read:readNode
+      make:createConfiguration
     }
   }
 

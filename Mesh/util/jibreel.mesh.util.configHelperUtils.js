@@ -56,22 +56,8 @@ exports.utils=function(app,promisifier,db) {
       })
   }
 
-  Utils.readNode = function(fullName){
-    return db.redis.get(fullName,function(reply){
-      promisifier.when(reply).then(
-        function(value){
-          console.log(value);
-          return value;
-        }
-      ).catch(
-        function(reason) {
-          console.log('Handle rejected promise ('+reason+') here.');
-        })
-    })
-  }
 
  return{
-   saveNode:Utils.validate,
-   readNode: Utils.readNode
+   saveNode:Utils.validate
  }
 }

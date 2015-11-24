@@ -12,7 +12,7 @@ var NODE = (function(maker) {
 
     function nodeFactory() {}
 
-    nodeFactory.prototype.createNode = function ( options ) {
+    nodeFactory.createNode = function ( options ) {
 
       if (typeof options === 'undefined') {
         options={};
@@ -52,25 +52,30 @@ var NODE = (function(maker) {
     }
 
 
-    nodeFactory.prototype.readNode = function ( fullName ) {
-     if(typeof maker !== "undefined" && typeof maker.read(fullName) !== "undefined") {
-        return maker.read(fullName);
-      }
+    nodeFactory.readNode = function ( fullName ,callback) {
+
+      maker.read(fullName ,function(result){
+         console.log(result)
+         return callback(result);
+      })
+
     }
 
-    return  new nodeFactory();
+    return nodeFactory;
   }
 
   return {
     getInstance: function() {
       if (!instance) {
-        instance = init();
+        instance = new init();
       }
       return instance;
     }
   };
 
 })(registry.make);
+
+
 
 module.exports.NODE= NODE.getInstance();
 

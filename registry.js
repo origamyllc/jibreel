@@ -11,6 +11,8 @@ exports.get=function() {
       fs=require('fs');
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
   var configHelper = require('./Mesh/helpers/jibreel.mesh.nodes.configHelper').CONFIG_HELPER;
+  var redis= require('./Core/server/db/redis/jibreel.core.server.db.redis.factory').REDIS;
+
 
  return {
     fractals: fractals,
@@ -20,6 +22,7 @@ exports.get=function() {
     nodeFactory: nodeFactory,
     uuid: uuid,
     path:path,
-    fs:fs
+    fs:fs,
+   redis:redis
   }
 }

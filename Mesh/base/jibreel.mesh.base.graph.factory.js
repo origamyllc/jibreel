@@ -5,12 +5,12 @@
 var uuid = require('node-uuid');
 var registry=require("../../registry").get();
 
-var GRAPH = (function(nodeFactory) {
+var GRAPH = (function(nodeFactory,redis) {
 
   // our instance holder
   var instance,models={};
 
-  // Instance stores a reference to the Singleton
+
   function init() {
     return {
        createNode:function(options,callback){
@@ -18,9 +18,11 @@ var GRAPH = (function(nodeFactory) {
            node.id=uuid.v4();
            callback(node);
        },
-       readNode:function(name,callback){
-         var node =nodeFactory.readNode(name);
-         callback(node);
+       readNode:function(fullName,callback){
+         redis.get(fullName,function(result){
+           console.log(result);
+           return callback(result);
+         })
        },
        updateNode:function(name){
 
@@ -61,6 +63,6 @@ var GRAPH = (function(nodeFactory) {
     }
   };
 
-})(registry.nodeFactory);
+})(registry.nodeFactory,registry.redis);
 
 module.exports.GRAPH= GRAPH.getInstance();

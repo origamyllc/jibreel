@@ -24,7 +24,7 @@ var NODE = (function(maker) {
          throw "Thou shalt not initialize a base class!"
           break;
         case "config":
-          this.node= maker.make(options);
+          this.node = maker.make(options);
           break;
         case "control":
           // extend with compute base

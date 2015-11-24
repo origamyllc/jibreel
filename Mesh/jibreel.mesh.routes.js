@@ -1,8 +1,7 @@
 /**
  * Created by prashun on 11/17/15.
  */
-module.exports = function(app,promisifier,util) {
-  var Factory= require('./base/jibreel.mesh.base.graph.factory').GRAPH;
+module.exports = function(app,promisifier,util,Factory) {
   var obj ={
       createNode:function(){
         app.post('/mesh/create/node', function (req, res) {
@@ -20,7 +19,7 @@ module.exports = function(app,promisifier,util) {
       },
      readNode:function(){
        app.post('/mesh/read/node', function (req, res) {
-         Factory.readNode('nanchakoo', function (node) {
+         Factory.readNode(req.body.options , function (node) {
            res.status(200).send(node)
          });
        });

@@ -19,8 +19,20 @@ exports.utils=function(promisifier) {
   }
 
   CollectorUtils.validate = function(node){
-    return promisifier.when(Utils.validateNode(node)).then(
+    return promisifier.when(CollectorUtils.validateNode(node)).then(
       console.log("sucsessfully saved the node with id : node--" + node.id + " !")
+    ).catch(
+      function (reason) {
+        console.log('Handle rejected promise (' + reason + ') here.');
+      }
+    )
+  }
+
+  CollectorUtils.stream = function (node){
+    return promisifier.when(CollectorUtils.validate(node)).then(
+      function(){
+        console.log(node.url,node.pollInterval);
+      }
     ).catch(
       function (reason) {
         console.log('Handle rejected promise (' + reason + ') here.');

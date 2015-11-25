@@ -9,8 +9,7 @@ var COLLECTOR_HELPER = (function() {
 
   function streamData (node){
     if(node.isActive){
-       registry.collectorUtil.validate(node);
-       console.log(node.url,node.pollInterval);
+       registry.collectorUtil.stream(node);
     }
   }
 

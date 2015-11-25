@@ -24,7 +24,7 @@ exports.utils=function(app,promisifier,db) {
   }
 
   ConfigUtils.save = function (node){
-      return promisifier.when(Utils.persist(node)).then(
+      return promisifier.when(ConfigUtils.persist(node)).then(
         console.log("sucsessfully saved the node with id : node--" + node.id + " !")
       ).catch(
         function (reason) {
@@ -47,8 +47,8 @@ exports.utils=function(app,promisifier,db) {
   }
 
   ConfigUtils.validate = function (node){
-    promisifier.when(Utils.validateNode(node)).then(
-      Utils.save(node)
+    promisifier.when(ConfigUtils.validateNode(node)).then(
+      ConfigUtils.save(node)
     ).catch(
       function(reason) {
         console.log('Handle rejected promise ('+reason+') here.');
@@ -57,6 +57,6 @@ exports.utils=function(app,promisifier,db) {
 
 
  return{
-   saveNode:Utils.validate
+   saveNode:ConfigUtils.validate
  }
 }

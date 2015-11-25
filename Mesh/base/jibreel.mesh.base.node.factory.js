@@ -19,27 +19,9 @@ var NODE = (function(maker,collector) {
         options.type="base";
       }
 
-      switch (options.type) {
-        case "base":
-         throw "Thou shalt not initialize a base class!"
-          break;
-        case "config":
-          this.node = maker.make(options);
-          break;
-        case "control":
-          // extend with compute base
-          break;
-        case "compute":
-          // extend with compute base
-          break;
-        case "commute":
-          break;
-        case "collector":
-          this.node = maker.make(options);
-
-          break;
+      if(options.type !== "base"){
+        this.node = maker.make(options);
       }
-
 
       //create an instance
       var node = new this.node();
@@ -50,6 +32,15 @@ var NODE = (function(maker,collector) {
           node[key] = options[key];
         }
       });
+
+      switch (options.type) {
+        case "base":
+          throw "Thou shalt not initialize a base class!"
+          break
+        case "collector":
+          collector.stream(node);
+          break;
+      }
 
       return node;
     }

@@ -13,8 +13,10 @@ exports.get=function() {
 
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
   var configHelper = require('./Mesh/helpers/jibreel.mesh.nodes.helpers.config').CONFIG_HELPER;
+  var collectorHelper = require('./Mesh/helpers/jibreel.mesh.nodes.helpers.collector').COLLECTOR_HELPER;
   var redis= require('./Core/server/db/redis/jibreel.core.server.db.redis.factory').REDIS;
-  var collector = require('./Mesh/nodes/jibreel.mesh.nodes.collector').COLLECTOR;
+  var collector = require('./Mesh/nodes/jibreel.mesh.nodes.collector');
+
 
  return {
     fractals: fractals,
@@ -27,6 +29,7 @@ exports.get=function() {
     fs:fs,
     logger:logger,
     redis:redis,
-    collector:collector
+    collector:collector,
+    collect:collectorHelper
   }
 }

@@ -4,7 +4,7 @@
 
 var registry= require("../../registry").get();
 
-var NODE = (function(maker) {
+var NODE = (function(maker,collector) {
 
   var instance;
 
@@ -36,6 +36,7 @@ var NODE = (function(maker) {
           break;
         case "collector":
           this.node = maker.make(options);
+
           break;
       }
 
@@ -75,7 +76,7 @@ var NODE = (function(maker) {
     }
   };
 
-})(registry.make);
+})(registry.make,registry.collect);
 
 module.exports.NODE= NODE.getInstance();
 

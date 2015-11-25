@@ -6,9 +6,7 @@ var COLLECTOR_HELPER = (function() {
 
   // Instance stores a reference to the Singleton
   function init() {
-    return {
-
-    }
+   console.log('here!!')
   }
 
   return {

@@ -10,7 +10,6 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
   nodes["base"]=base;
   nodes["collector"]=collector;
 
-
   bootstrapFoldersAtPath(configPath);
 
   function bootstrapFoldersAtPath(path){
@@ -34,7 +33,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
           this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
           break;
         case "collector":
-           this.node = fractals.extend(nodes["base"](options),nodes["collector"]);
+           this.node = fractals.extend(nodes["base"](options),nodes["collector"](options));
           break;
         case undefined:
           this.node = nodes["base"];

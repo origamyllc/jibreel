@@ -35,8 +35,10 @@ var NODE = (function(maker) {
         case "commute":
           break;
         case "collector":
+          this.node = maker.make(options);
           break;
       }
+
 
       //create an instance
       var node = new this.node();

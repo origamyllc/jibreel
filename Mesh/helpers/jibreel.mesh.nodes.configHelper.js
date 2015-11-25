@@ -1,17 +1,17 @@
 var registry=require("../../registry").get();
 
 
-var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
+var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
 
   var instance,nodes={};
 
   var configPath = path.join(__dirname, '../nodes/config');
-  var collectorPath = path.join(__dirname, '../nodes/collector');
 
   nodes["base"]=base;
+  nodes["collector"]=collector;
+
 
   bootstrapFoldersAtPath(configPath);
- // bootstrapFoldersAtPath(collectorPath);
 
   function bootstrapFoldersAtPath(path){
     fs.readdirSync(path).forEach(function(file) {
@@ -34,7 +34,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
           this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
           break;
         case "collector":
-         // this.node = fractals.extend(function (){this.src-="sql",this.schema="device"},nodes["device"](options));
+           this.node = fractals.extend(nodes["base"](options),nodes["collector"](options));
           break;
         case undefined:
           this.node = nodes["base"];
@@ -60,7 +60,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,helper) {
     }
   };
 
-})(registry.baseNode,registry.fractals,registry.path,registry.fs,registry.configUtil);
+})(registry.baseNode,registry.fractals,registry.path,registry.fs,registry.collector);
 
 
 module.exports.CONFIG_HELPER = CONFIG_HELPER.getInstance();

@@ -3,9 +3,9 @@
  */
 exports.utils=function(promisifier) {
 
-  Utils=this;
+  CollectorUtils=this;
 
-  Utils.validateNode = function(node){
+  CollectorUtils.validateNode = function(node){
     if(! node.url ){
       throw "The collector url can not be null"
     }
@@ -18,7 +18,7 @@ exports.utils=function(promisifier) {
     return node;
   }
 
-  Utils.validate = function(node){
+  CollectorUtils.validate = function(node){
     return promisifier.when(Utils.validateNode(node)).then(
       console.log("sucsessfully saved the node with id : node--" + node.id + " !")
     ).catch(
@@ -26,10 +26,6 @@ exports.utils=function(promisifier) {
         console.log('Handle rejected promise (' + reason + ') here.');
       }
     )
-  }
-
-  return{
-    validate:Utils.validate
   }
 
 };

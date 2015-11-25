@@ -11,9 +11,9 @@ exports.utils=function(app,promisifier,db) {
     nodes[fileNameArray[fileNameArray.length-2]]=require(transformerPath + '/' + file);
   });
 
-  Utils = this;
+  ConfigUtils = this;
 
-  Utils.validateNode = function (node){
+  ConfigUtils.validateNode = function (node){
     if(node.name === 'static'){
       throw "Please pass the node name as an option !"
     }
@@ -23,8 +23,7 @@ exports.utils=function(app,promisifier,db) {
     return node;
   }
 
-  Utils.save = function (node){
-    if(node.fullName) {
+  ConfigUtils.save = function (node){
       return promisifier.when(Utils.persist(node)).then(
         console.log("sucsessfully saved the node with id : node--" + node.id + " !")
       ).catch(
@@ -32,10 +31,10 @@ exports.utils=function(app,promisifier,db) {
           console.log('Handle rejected promise (' + reason + ') here.');
         }
       )
-    }
+
   }
 
-  Utils.persist = function (node){
+  ConfigUtils.persist = function (node){
     if(node.db === "sql" && nodes[node.schema]) {
       db.sql.insert(node.schema, nodes[node.schema](node));
       // should calculate hash of the  node full name and set it as the key
@@ -47,7 +46,7 @@ exports.utils=function(app,promisifier,db) {
     }
   }
 
-  Utils.validate = function (node){
+  ConfigUtils.validate = function (node){
     promisifier.when(Utils.validateNode(node)).then(
       Utils.save(node)
     ).catch(

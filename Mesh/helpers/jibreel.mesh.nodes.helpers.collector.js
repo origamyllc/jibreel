@@ -7,10 +7,10 @@ var COLLECTOR_HELPER = (function() {
 
   // Instance stores a reference to the Singleton
 
-  function streamData (options){
-    if(options.isActive){
-     console.log(registry.collectorUtil);
-      console.log(options.url,options.pollInterval)
+  function streamData (node){
+    if(node.isActive){
+       registry.collectorUtil.validate(node);
+       console.log(node.url,node.pollInterval);
     }
   }
 

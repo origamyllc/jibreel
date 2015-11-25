@@ -34,7 +34,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
           this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
           break;
         case "collector":
-           this.node = fractals.extend(nodes["base"](options),nodes["collector"](options));
+           this.node = fractals.extend(nodes["base"](options),nodes["collector"]);
           break;
         case undefined:
           this.node = nodes["base"];

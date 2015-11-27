@@ -19,6 +19,7 @@ exports.get=function() {
   var collectorHelper = require('./Mesh/helpers/jibreel.mesh.nodes.helpers.collector').COLLECTOR_HELPER;
   var redis= require('./Core/server/db/redis/jibreel.core.server.db.redis.factory').REDIS;
   var lru=require('./Core/server/cache/lru/jibreel.core.server.cache.lru.factory').LRU;
+  var eventBus=require('./Core/server/eventBus/jibreel.core.server.eventBus').EVENT_BUS;
   var graph=require('./Mesh/base/jibreel.mesh.base.graph.factory').GRAPH;
 
  return {
@@ -37,6 +38,7 @@ exports.get=function() {
     collectorUtil:collectorUtil,
     lru:lru,
     graph:graph,
-    crypto:crypto
+    crypto:crypto,
+    bus:eventBus
   }
 }

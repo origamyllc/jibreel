@@ -2,10 +2,7 @@ var registry=require("../../registry").get();
 
 var COLLECTOR_HELPER = (function() {
 
-  // our instance holder
   var instance,models={};
-
-  // Instance stores a reference to the Singleton
 
   function startCollector (node){
     if(node.isActive){
@@ -17,13 +14,11 @@ var COLLECTOR_HELPER = (function() {
      // registry.collectorUtil.stream(node);
   }
 
-  function ping(){}
 
   function init() {
     return{
       stream:startCollector,
-      stop:stopCollector,
-      ping:ping
+      stop:stopCollector
     }
   }
 

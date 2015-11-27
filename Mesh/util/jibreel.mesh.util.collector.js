@@ -32,7 +32,7 @@ exports.utils=function(promisifier,http) {
     return promisifier.when(CollectorUtils.validate(node)).then(
       function(){
         var interval = setInterval(function() {
-          http.request({
+          http.stream({
             host: 'www.google.com',
             path: '/'
           });
@@ -44,5 +44,4 @@ exports.utils=function(promisifier,http) {
       }
     )
   }
-
 };

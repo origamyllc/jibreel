@@ -14,7 +14,7 @@ var GRAPH = (function(nodeFactory,redis) {
   function init() {
     return {
        createNode:function(options,callback){
-         var node =nodeFactory.createNode(options);
+         var node = nodeFactory.createNode(options);
            node.id=uuid.v4();
            callback(node);
        },

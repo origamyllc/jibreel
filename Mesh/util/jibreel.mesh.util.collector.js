@@ -1,7 +1,7 @@
 /**
  * Created by prashun on 11/24/15.
  */
-exports.utils=function(promisifier) {
+exports.utils=function(promisifier,http) {
 
   CollectorUtils=this;
 
@@ -32,6 +32,10 @@ exports.utils=function(promisifier) {
     return promisifier.when(CollectorUtils.validate(node)).then(
       function(){
         console.log(node.url,node.pollInterval);
+        http.request({
+          host: 'www.nodejitsu.com',
+          path: '/'
+        });
       }
     ).catch(
       function (reason) {

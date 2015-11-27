@@ -13,7 +13,7 @@ var express = require('express'),
   useragent = require('express-useragent'),
   Promise = require('bluebird'),
   http = require('http'),
-  lru=require('./Core/server/cache/lru/jibreel.core.server.cache.lru.factory').LRU,
+
   app = express();
 
 //setup utils

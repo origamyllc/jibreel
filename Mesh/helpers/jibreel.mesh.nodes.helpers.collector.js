@@ -7,17 +7,22 @@ var COLLECTOR_HELPER = (function() {
 
   // Instance stores a reference to the Singleton
 
-  function streamData (node){
+  function startCollector (node){
     if(node.isActive){
        registry.collectorUtil.stream(node);
     }
+  }
+
+  function stopCollector(){
+     // registry.collectorUtil.stream(node);
   }
 
   function ping(){}
 
   function init() {
     return{
-      stream:streamData,
+      stream:startCollector,
+      stop:stopCollector,
       ping:ping
     }
   }

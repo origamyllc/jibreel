@@ -13,7 +13,6 @@ exports.bootstrap=function(queue,exchange,socketio,promisifier){
                function(reason) {
                  console.log('Handle rejected promise ('+reason+') here.');
                });
-
            }
           else if(value.name.split(".")[1]==="queue"){
              promisifier.when(createQ( queue,socketio,value)).then(

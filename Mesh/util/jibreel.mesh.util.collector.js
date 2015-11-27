@@ -31,11 +31,12 @@ exports.utils=function(promisifier,http) {
   CollectorUtils.stream = function (node){
     return promisifier.when(CollectorUtils.validate(node)).then(
       function(){
-        console.log(node.url,node.pollInterval);
-        http.request({
-          host: 'www.nodejitsu.com',
-          path: '/'
-        });
+        var interval = setInterval(function() {
+          http.request({
+            host: 'www.google.com',
+            path: '/'
+          });
+        }, 1000);
       }
     ).catch(
       function (reason) {

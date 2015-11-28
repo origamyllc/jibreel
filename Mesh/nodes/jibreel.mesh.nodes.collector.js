@@ -11,6 +11,8 @@
   deviceCollectorNode.prototype = function (options) {
     this.fullName = options.fullName || "static";
     this.url = options.url || null;
+    this.urlHost= options.urlHost || null;
+    this.urlPath = options.urlPath || null;
     this.pollInterval = options.pollInterval || null;
     this.source = options.source || "static";
   }

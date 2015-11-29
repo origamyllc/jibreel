@@ -22,7 +22,11 @@ var LRU = (function() {
         cache.reset();
       },
       update:function(key,value){
-        cache.get(key).push(value);
+        var result = cache.get(key);
+        if( typeof result != "undefined" && result.indexOf(value) === -1){
+           result.push(value);
+           cache.set(key,result);
+        }
       },
       hasKey : function(key){
          return cache.has(key);

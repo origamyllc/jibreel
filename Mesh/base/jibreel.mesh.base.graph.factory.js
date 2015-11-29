@@ -5,13 +5,13 @@
 var uuid = require('node-uuid');
 var registry=require("../../registry").get();
 
-var GRAPH = (function(nodeFactory,redis) {
+var GRAPH = (function(nodeFactory,redis,edgeFactory) {
 
   // our instance holder
   var instance,models={};
 
-
   function init() {
+
     return {
        createNode:function(options,callback){
          var node = nodeFactory.createNode(options);
@@ -32,8 +32,10 @@ var GRAPH = (function(nodeFactory,redis) {
        getAdjacentNodes:function(name){
 
        },
-       createEdge:function(from,to){
-
+       addEdge:function(options,callback){
+         var edge = edgeFactory.addEdge(options);
+         edge.id=uuid.v4();
+         callback(edge);
        },
        readEdge:function(from,to){
 
@@ -62,6 +64,6 @@ var GRAPH = (function(nodeFactory,redis) {
     }
   };
 
-})(registry.nodeFactory,registry.redis);
+})(registry.nodeFactory,registry.redis,registry.edgeFactory);
 
 module.exports.GRAPH= GRAPH.getInstance();

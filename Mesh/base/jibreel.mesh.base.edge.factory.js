@@ -1,4 +1,6 @@
 
+var registry= require("../../registry").get();
+
 var EDGE = (function() {
 
   // our instance holder
@@ -15,9 +17,7 @@ var EDGE = (function() {
 
   function init() {
 
-    function edgeFactory() {}
-
-    edgeFactory.createEdge = function ( options ) {
+    var edge= function(options){
       this.fromNode = options.fromNode || null;
       this.toNode = options.toNode || null;
       this.weight = options.weight || null;
@@ -26,9 +26,13 @@ var EDGE = (function() {
       this.createdAt = new Date();
     };
 
-    return {
-      addEdge : createEdge
-    }
+    function edgeFactory() {}
+
+    edgeFactory.prototype.addEdge = function ( options ) {
+        return  new edge(options);
+    };
+
+    return new  edgeFactory();
   }
 
 

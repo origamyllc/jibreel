@@ -23,7 +23,14 @@ module.exports = function(app,promisifier,util,Factory) {
            res.status(200).send(node)
          });
        });
-     }
+     },
+    addEdge : function(){
+      app.post('/mesh/create/edge', function (req, res) {
+        Factory.addEdge(req.body.options, function (edge) {
+           console.log(edge);
+        });
+      });
+    }
   }
   return obj;
 }

@@ -15,6 +15,7 @@ exports.get=function() {
       fs=require('fs');
 
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
+  var edgeFactory = require('./Mesh/base/jibreel.mesh.base.edge.factory').EDGE;
   var configHelper = require('./Mesh/helpers/jibreel.mesh.nodes.helpers.config').CONFIG_HELPER;
   var collectorHelper = require('./Mesh/helpers/jibreel.mesh.nodes.helpers.collector').COLLECTOR_HELPER;
   var redis= require('./Core/server/db/redis/jibreel.core.server.db.redis.factory').REDIS;
@@ -28,6 +29,7 @@ exports.get=function() {
     configUtil:configUtil,
     baseNode : base,
     nodeFactory : nodeFactory,
+    edgeFactory : edgeFactory,
     uuid: uuid,
     path:path,
     fs:fs,

@@ -1,7 +1,7 @@
 /**
  * Created by prashun on 11/17/15.
  */
-module.exports = function(app,promisifier,util,Factory) {
+module.exports = function(app,promisifier,util,Factory,edgeUtil) {
   var obj ={
       createNode:function(){
         app.post('/mesh/create/node', function (req, res) {
@@ -27,7 +27,8 @@ module.exports = function(app,promisifier,util,Factory) {
     addEdge : function(){
       app.post('/mesh/create/edge', function (req, res) {
         Factory.addEdge(req.body.options, function (edge) {
-           console.log(edge);
+          edgeUtil.validate(edge);
+          res.status(200).send(edge)
         });
       });
     }

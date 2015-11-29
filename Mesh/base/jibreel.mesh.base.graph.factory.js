@@ -5,7 +5,7 @@
 var uuid = require('node-uuid');
 var registry=require("../../registry").get();
 
-var GRAPH = (function(nodeFactory,redis,edgeFactory) {
+var GRAPH = (function(nodeFactory,redis,edgeFactory,lru) {
 
   // our instance holder
   var instance,models={};
@@ -29,8 +29,12 @@ var GRAPH = (function(nodeFactory,redis,edgeFactory) {
        deleteNode:function(name){
 
        },
-       getAdjacentNodes:function(name){
-
+       getAdjacentNodes:function(name,callback){
+          lru.get(name,function(adjacentNodes){
+            if(typeof adjacentNodes !== 'undefined') {
+              return callback(adjacentNodes);
+            }
+          })
        },
        addEdge:function(options,callback){
          var edge = edgeFactory.addEdge(options);
@@ -44,9 +48,6 @@ var GRAPH = (function(nodeFactory,redis,edgeFactory) {
 
        },
        deleteEdge:function(from,to){
-
-       },
-       getAdjacencyMatrix:function(){
 
        }
     }
@@ -64,6 +65,6 @@ var GRAPH = (function(nodeFactory,redis,edgeFactory) {
     }
   };
 
-})(registry.nodeFactory,registry.redis,registry.edgeFactory);
+})(registry.nodeFactory,registry.redis,registry.edgeFactory,registry.lru);
 
 module.exports.GRAPH= GRAPH.getInstance();

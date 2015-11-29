@@ -1,5 +1,5 @@
-var LRUCache = require('lrucache');
-var cache = LRUCache(100);
+var LRUCache = require('lru-cache');
+var cache = LRUCache(1000);
 
 var LRU = (function() {
 
@@ -16,16 +16,16 @@ var LRU = (function() {
         cache.set(key,value);
       },
       del:function(key){
-        cache.remove(key);
+        cache.del(key);
       },
       clear:function(){
-        cache.removeAll();
+        cache.reset();
       },
       update:function(key,value){
-        cache.update(key, function (a) {
-          a.push(value);
-          return a
-        });
+        cache.get(key).push(value);
+      },
+      hasKey : function(key){
+         return cache.has(key);
       }
     }
   }

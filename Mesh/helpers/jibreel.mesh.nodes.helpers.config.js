@@ -22,7 +22,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
   function init() {
 
     function createConfiguration(options){
-      switch (options.subType) {
+      switch (options.type) {
         case "temperature":
           this.node = fractals.extend(nodes["base"](options),nodes["temperature"](options));
           break;

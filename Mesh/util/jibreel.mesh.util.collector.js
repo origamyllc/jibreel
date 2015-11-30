@@ -6,14 +6,14 @@ exports.utils=function(promisifier,http) {
   CollectorUtils=this;
 
   CollectorUtils.validateNode = function(node){
-    if(! node.url ){
-      throw "The collector url can not be null"
+    if(! node.host ){
+      throw "The collector host can not be null"
+    }
+    if(! node.path ){
+      throw "The collector path can not be null"
     }
     if(! node.pollInterval){
       throw "You must define a poll interval"
-    }
-    if(! node.source ){
-      throw "You need to define the source"
     }
     return node;
   }

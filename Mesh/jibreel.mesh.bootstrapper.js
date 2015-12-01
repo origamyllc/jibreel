@@ -12,10 +12,12 @@ exports.bootstrap=function(app,promisifier,db) {
   var configUtil= require('./util/jibreel.mesh.util.config').utils(app,promisifier,db,crypto);
   var edgeUtil= require('./util/jibreel.mesh.util.edge').utils(app,promisifier,db,lru);
   var collectorUtil= require('./util/jibreel.mesh.util.collector').utils(promisifier,http);
-  var routes= require('./jibreel.mesh.routes')(app,promisifier,configUtil,Factory,edgeUtil);
+  var routes= require('./jibreel.mesh.routes')(app,promisifier,configUtil,Factory,edgeUtil,collectorUtil);
 
   routes.createNode();
   routes.readNode();
   routes.addEdge();
+  routes.switch();
   routes.simulate();
+
 }

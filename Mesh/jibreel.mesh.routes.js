@@ -1,7 +1,7 @@
 /**
  * Created by prashun on 11/17/15.
  */
-module.exports = function(app,promisifier,util,Factory,edgeUtil) {
+module.exports = function(app,promisifier,util,Factory,edgeUtil,collectorUtil) {
   var obj ={
       createNode:function(){
         app.post('/mesh/create/node', function (req, res) {
@@ -31,6 +31,12 @@ module.exports = function(app,promisifier,util,Factory,edgeUtil) {
           res.status(200).send(edge)
         });
       });
+    },
+    switch : function(){
+      app.get('/mesh/temperature/:flag', function (req, res) {
+        collectorUtil.toggle(req.params.flag);
+        res.status(200).send("collector turned" + req.params.flag );
+      })
     },
     simulate : function(){
       app.get('/mesh/simulate/temperature', function (req, res) {

@@ -3,10 +3,10 @@
  */
 exports.utils=function(promisifier,http) {
 
+
   CollectorUtils=this;
 
   CollectorUtils.validateNode = function(node){
-    console.log(node)
     if(! node.urlHost ){
       throw "The collector host can not be null"
     }
@@ -37,10 +37,8 @@ exports.utils=function(promisifier,http) {
           port: node.urlPort,
           path: node.urlPath
         };
-
-        var interval = setInterval(function() {
-          http.stream(options);
-        }, parseInt(node.pollInterval));
+        CollectorUtils.options = options;
+        CollectorUtils.pollInterval= node.pollInterval;
       }
     ).catch(
       function (reason) {
@@ -48,4 +46,21 @@ exports.utils=function(promisifier,http) {
       }
     )
   }
+
+  CollectorUtils.toggle = function (flag){
+    if(flag === "on"){
+      CollectorUtils.interval = setInterval(function () {
+        http.stream( CollectorUtils.options);
+      }, parseInt(CollectorUtils.pollInterval));
+    }
+    else{
+      clearInterval(CollectorUtils.interval);
+    }
+  }
+
+  return {
+    toggle:  CollectorUtils.toggle
+  }
+
 };
+

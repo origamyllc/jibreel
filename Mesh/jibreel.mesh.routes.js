@@ -31,8 +31,14 @@ module.exports = function(app,promisifier,util,Factory,edgeUtil) {
           res.status(200).send(edge)
         });
       });
+    },
+    simulate : function(){
+      app.get('/mesh/simulate/temperature', function (req, res) {
+        res.status(200).send({"currentTemperatue":25,"unit":"f"})
+      })
+     }
     }
-  }
+
   return obj;
 }
 

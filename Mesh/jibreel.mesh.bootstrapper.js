@@ -17,5 +17,5 @@ exports.bootstrap=function(app,promisifier,db) {
   routes.createNode();
   routes.readNode();
   routes.addEdge();
-
+  routes.simulate();
 }

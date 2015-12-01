@@ -15,6 +15,7 @@
     this.urlPath = options.urlPath || null;
     this.pollInterval = options.pollInterval || null;
     this.source = options.source || "static";
+    this.urlPort = options.urlPort || "static";
   }
 
   return deviceCollectorNode;

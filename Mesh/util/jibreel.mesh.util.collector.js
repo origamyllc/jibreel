@@ -32,11 +32,14 @@ exports.utils=function(promisifier,http) {
   CollectorUtils.stream = function (node){
     return promisifier.when(CollectorUtils.validate(node)).then(
       function(){
+        var options = {
+          host: node.urlHost,
+          port: node.urlPort,
+          path: node.urlPath
+        };
+
         var interval = setInterval(function() {
-          http.stream({
-            host: node.urlHost,
-            path: node.urlPath
-          });
+          http.stream(options);
         }, parseInt(node.pollInterval));
       }
     ).catch(

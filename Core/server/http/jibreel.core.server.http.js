@@ -12,12 +12,15 @@ var HTTP = (function(bus) {
   var instance,models={};
 
   var callback = function(response) {
+    var str = '';
       response.on('data', function (chunk) {
-        bus.emit('stream',chunk);
-        bus.on('stream',function(data){
-          console.log(data);
-        });
+        str += chunk;
       });
+
+    response.on('end', function () {
+      bus.emit('stream',str);
+    });
+
     }
 
   function init() {

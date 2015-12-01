@@ -7,8 +7,10 @@ module.exports = function() {
 
   var deviceControllerNode = function () {}
 
-  deviceControllerNode.prototype.getStream = function () {
-     console.log("Hot line Bling !! ")
+  deviceControllerNode.prototype.init = function (bus) {
+    bus.on('stream',function(data){
+      console.log(data);
+    });
   }
 
   return new deviceControllerNode();

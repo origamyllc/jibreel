@@ -4,6 +4,17 @@
 
 {"options":{"type":"collector", "fullName":"mesh.temperature.collector","name":"temperature-collector","urlHost":"www.google.com","urlPath":"/","pollInterval":1000}}
 
-{"options":{"fromNode": "mesh.temperature", "relationship": "has-a","toNode": "mesh.temperature.collector" }}
+{"options":{"type":"control","name":"temperature-control","fullName":"mesh.control.temperature"}}
+
 
 {"options":{"fromNode": "mesh.device.spool", "relationship": "has-a","toNode": "mesh.temperature" }}
+
+{"options":{"fromNode": "mesh.device.spool", "relationship": "has-a","toNode": "mesh.temperature.collector" }}
+
+{"options":{"fromNode": "mesh.temperature", "relationship": "has-a","toNode": "mesh.control.temperature" }}
+
+{"options":{"fromNode": "mesh.temperature.collector", "relationship": "has-a","toNode": "mesh.control.temperature" }}
+
+// {"options":{"fromNode": "mesh.control.temperature", "relationship": "has-a","toNode": "mesh.comparator" }}
+
+// {"options":{"fromNode": "mesh.control.temperature", "relationship": "has-a","toNode": "mesh.commute.rabbitmq" }}

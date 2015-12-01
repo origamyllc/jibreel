@@ -4,7 +4,7 @@
 
 var registry= require("../../registry").get();
 
-var NODE = (function(maker,collector,controller) {
+var NODE = (function(maker,collector,controller,bus) {
 
   var instance;
 
@@ -42,7 +42,7 @@ var NODE = (function(maker,collector,controller) {
           collector.stream(node);
           break;
         case "control":
-         new controller().getStream()
+         new controller().init(bus)
           break;
       }
 
@@ -71,7 +71,7 @@ var NODE = (function(maker,collector,controller) {
     }
   };
 
-})(registry.make,registry.collect,registry.controller);
+})(registry.make,registry.collect,registry.controller,registry.bus);
 
 module.exports.NODE= NODE.getInstance();
 

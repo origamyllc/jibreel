@@ -1,33 +1,17 @@
 /**
- * Created by prashun on 11/28/15.
+ * Created by prashun on 11/24/15.
  */
 
-var CONTROLLER_NODE = (function() {
 
-  // our instance holder
-  var instance,models={};
+module.exports = function() {
 
-  // Instance stores a reference to the Singleton
-  function init() {
-    return {
+  var deviceControllerNode = function () {}
 
-    }
+  deviceControllerNode.prototype.getStream = function () {
+     console.log("Hot line Bling !! ")
   }
 
+  return new deviceControllerNode();
 
-  return {
-    // Get the Singleton instance if one exists
-    // or create one if it doesn't
-    getInstance: function() {
-      if (!instance) {
-        instance = init();
-      }
-      return instance;
-    }
-  };
-
-})();
-
-module.exports.CONTROLLER_NODE = CONTROLLER_NODE.getInstance();
-
+}
 

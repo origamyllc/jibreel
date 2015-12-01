@@ -6,10 +6,11 @@ exports.utils=function(promisifier,http) {
   CollectorUtils=this;
 
   CollectorUtils.validateNode = function(node){
-    if(! node.host ){
+    console.log(node)
+    if(! node.urlHost ){
       throw "The collector host can not be null"
     }
-    if(! node.path ){
+    if(! node.urlPath ){
       throw "The collector path can not be null"
     }
     if(! node.pollInterval){
@@ -33,10 +34,10 @@ exports.utils=function(promisifier,http) {
       function(){
         var interval = setInterval(function() {
           http.stream({
-            host: 'www.google.com',
-            path: '/'
+            host: node.urlHost,
+            path: node.urlPath
           });
-        }, 1000);
+        }, parseInt(node.pollInterval));
       }
     ).catch(
       function (reason) {

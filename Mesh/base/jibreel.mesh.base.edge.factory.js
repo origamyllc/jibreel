@@ -6,15 +6,6 @@ var EDGE = (function() {
   // our instance holder
   var instance,models={};
 
-  /**
-   *
-   * addEdge(i,j)
-   $ removeEdge(i,j)
-   $ hasEdge(i,j)
-   $ outEdges(i)
-   $ inEdges(i)
-   */
-
   function init() {
 
     var edge= function(options){

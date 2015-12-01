@@ -8,7 +8,7 @@ module.exports =  {
   },
   execute:function (self) {
     var src = function(){
-      self.prototype.call(this,arguments);
+      self.call(this,arguments);
     };
     return src;
   },

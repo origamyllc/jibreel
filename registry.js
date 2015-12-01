@@ -8,11 +8,13 @@ exports.get=function() {
   var configUtil= require('./Mesh/util/jibreel.mesh.util.config');
   var collectorUtil= require('./Mesh/util/jibreel.mesh.util.collector');
   var collector = require('./Mesh/nodes/jibreel.mesh.nodes.collector');
+  var controller = require('./Mesh/nodes/jibreel.mesh.nodes.control');
   var base = require('./Mesh/nodes/jibreel.mesh.nodes.base');
   var uuid = require('node-uuid');
   var path=require('path'),
       crypto=require('crypto'),
       fs=require('fs');
+
 
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
   var edgeFactory = require('./Mesh/base/jibreel.mesh.base.edge.factory').EDGE;
@@ -41,6 +43,7 @@ exports.get=function() {
     lru:lru,
     graph:graph,
     crypto:crypto,
-    bus:eventBus
+    bus:eventBus,
+    controller:controller
   }
 }

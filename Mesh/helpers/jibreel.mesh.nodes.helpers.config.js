@@ -35,10 +35,14 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
         case "collector":
            this.node = fractals.extend(nodes["base"](options),nodes["collector"](options));
           break;
+        case "control":
+          this.node =fractals.execute( nodes["base"](options));
+          break;
         case undefined:
-          this.node = nodes["base"];
+          this.node = fractals.execute(nodes["base"]);
           break;
       }
+
       return  this.node;
     };
 

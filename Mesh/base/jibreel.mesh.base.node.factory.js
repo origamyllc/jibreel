@@ -4,7 +4,7 @@
 
 var registry= require("../../registry").get();
 
-var NODE = (function(maker,collector,controller,bus) {
+var NODE = (function(maker,collector,controller,bus,redis,lru) {
 
   var instance;
 
@@ -37,12 +37,12 @@ var NODE = (function(maker,collector,controller,bus) {
       switch (options.type) {
         case "base":
           throw "Thou shalt not initialize a base class!"
-          break
+          break;
         case "collector":
           collector.stream(node);
           break;
         case "control":
-         new controller().init(bus)
+          controller.init(bus,node,redis,lru);
           break;
       }
 
@@ -53,7 +53,6 @@ var NODE = (function(maker,collector,controller,bus) {
     nodeFactory.readNode = function ( fullName ,callback) {
 
       maker.read(fullName ,function(result){
-         console.log(result)
          return callback(result);
       })
 
@@ -71,7 +70,7 @@ var NODE = (function(maker,collector,controller,bus) {
     }
   };
 
-})(registry.make,registry.collect,registry.controller,registry.bus);
+})(registry.make,registry.collect,registry.controller,registry.bus,registry.redis,registry.lru);
 
 module.exports.NODE= NODE.getInstance();
 

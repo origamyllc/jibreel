@@ -4,6 +4,7 @@ var registry=require("../../registry").get();
 var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
 
   var instance,nodes={};
+  var self=this;
 
   var configPath = path.join(__dirname, '../nodes/config');
 
@@ -24,26 +25,26 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
     function createConfiguration(options){
       switch (options.type) {
         case "temperature":
-          this.node = fractals.extend(nodes["base"](options),nodes["temperature"](options));
+          self.node = fractals.extend(nodes["base"](options),nodes["temperature"](options));
           break;
         case "smoke-alarm":
-          this.node = nodes["base"];
+          self.node = nodes["base"];
           break;
         case "device":
-          this.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
+          self.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));
           break;
         case "collector":
-           this.node = fractals.extend(nodes["base"](options),nodes["collector"](options));
+          self.node = fractals.extend(nodes["base"](options),nodes["collector"](options));
           break;
         case "control":
-          this.node =fractals.execute( nodes["base"](options));
+          self.node = fractals.execute( nodes["base"](options));
           break;
         case undefined:
-          this.node = fractals.execute(nodes["base"]);
+          self.node = fractals.execute(nodes["base"](options));
           break;
       }
 
-      return  this.node;
+      return  self.node;
     };
 
 

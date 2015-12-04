@@ -32,9 +32,18 @@ module.exports = function(app,promisifier,util,Factory,edgeUtil,collectorUtil) {
         });
       });
     },
+    getAdjacentNodes : function(){
+      app.get('/mesh/node/get/adjacent/:fullName', function (req, res) {
+        Factory.getAdjacentNodes(req.params.fullName, function (adjacentNodes) {
+          res.status(200).send(adjacentNodes);
+        });
+      });
+    },
     switch : function(){
-      app.get('/mesh/temperature/:flag', function (req, res) {
+      app.get('/mesh/collector/:flag', function (req, res) {
         collectorUtil.toggle(req.params.flag);
+        // toggle on the reciever too
+
         res.status(200).send("collector turned" + req.params.flag );
       })
     },

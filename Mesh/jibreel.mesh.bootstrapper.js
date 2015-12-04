@@ -19,5 +19,6 @@ exports.bootstrap=function(app,promisifier,db) {
   routes.addEdge();
   routes.switch();
   routes.simulate();
+  routes.getAdjacentNodes();
 
 }

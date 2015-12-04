@@ -44,6 +44,6 @@ exports.get=function() {
     graph:graph,
     crypto:crypto,
     bus:eventBus,
-    controller:controller
+    controller:  new controller()
   }
 }

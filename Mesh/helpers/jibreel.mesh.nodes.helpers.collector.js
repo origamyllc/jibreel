@@ -10,15 +10,11 @@ var COLLECTOR_HELPER = (function() {
     }
   }
 
-  function stopCollector(){
-     // registry.collectorUtil.stream(node);
-  }
 
 
   function init() {
     return{
-      stream:startCollector,
-      stop:stopCollector
+      stream:startCollector
     }
   }
 

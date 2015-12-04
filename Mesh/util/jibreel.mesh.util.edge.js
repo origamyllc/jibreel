@@ -26,6 +26,7 @@ exports.utils=function(app,promisifier,db,lru) {
       lru.update(edge.fromNode,edge.toNode);
       lru.update(edge.toNode,edge.fromNode);
     }
+
   }
 
   EdgeUtils.save = function(edge){

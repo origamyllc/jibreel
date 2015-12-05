@@ -1,4 +1,5 @@
-{"options":{"type":"device","UID":"universal-id","name":"spool","fullName":"mesh.device.spool","deviceType":"temperaturesensor","deviceName":"spool","deviceFullName":"mesh.device.spool","deviceModel":"spool-basic","deviceIpVersion":4,"deviceBrand":"none","deviceIP":"127.0.0.0","deviceMAC":"mac adress","createdAt":"today"}}
+
+{"options":{"type":"device","UID":"universal-id","name":"spool","fullName":"mesh.device.spool","deviceType":"temperature-sensor","deviceName":"spool","deviceFullName":"mesh.device.spool","deviceModel":"spool-basic","deviceIpVersion":4,"deviceBrand":"none","deviceIP":"127.0.0.0","deviceMAC":"mac adress","createdAt":"today"}}
 
 {"options":{ "type":"temperature","target_temperature_high_f": "60", "name":"temperature-sensor","fullName":"mesh.temperature.config","hvac_state": "cooling" }}
 

@@ -1,7 +1,7 @@
 /**
  * Created by prashun on 11/17/15.
  */
-exports.utils=function(app,promisifier,db) {
+exports.utils=function(app,promisifier,db,context) {
 
   var path=require('path'),fs = require('fs'),nodes={};
   var transformerPath = path.join(__dirname, '../transformers');
@@ -36,6 +36,7 @@ exports.utils=function(app,promisifier,db) {
 
   ConfigUtils.persist = function (node){
     if(node.db === "sql" && nodes[node.schema]) {
+      context.setToContext("deviceId",node.id);
       db.sql.insert(node.schema, nodes[node.schema](node));
       // should calculate hash of the  node full name and set it as the key
       db.redis.set(node.fullName , JSON.stringify( nodes[node.schema](node)));

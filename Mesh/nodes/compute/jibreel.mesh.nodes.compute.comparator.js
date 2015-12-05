@@ -4,22 +4,18 @@
 
 var registry= require("../../../registry").get();
 
-var COMPARATOR = (function(bus,exchange) {
+var COMPARATOR = (function(bus,exchange,context) {
 
   // our instance holder
   var instance;
 
   function init() {
     return {
-      compare : function(data,config){
+      compare : function(data,config,options){
         if(data.currentTemperatue === config.target_temperature_f){
-          bus.emit("event",{"message":"shit happend !"});
-
-          // to be moved to publish node 
-          bus.on("event",function(message){
-             exchange.publish("jibreel.exchange.home",message)
-          });
-
+            var header = new Buffer({"configId":config.id ,"deviceId":context.getContext().deviceId },"base64");
+            var message = new Buffer({"message":"temperature is equal !"},"base64");
+            bus.emit("event",{"header":header,"message":message});
         }
       }
     }
@@ -36,7 +32,7 @@ var COMPARATOR = (function(bus,exchange) {
     }
   };
 
-})(registry.bus,registry.exchange);
+})(registry.bus,registry.exchange,registry.context);
 
 module.exports.COMPARATOR = COMPARATOR.getInstance();
 

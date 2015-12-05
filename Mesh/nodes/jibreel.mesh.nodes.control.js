@@ -20,10 +20,9 @@ module.exports = function () {
   }
 
   self.stream = function(){
-
     self.getNode("config", function(config){
       self.bus.on('stream',function(data){
-          self.comparator.compare(data,config);
+          self.comparator.compare(data,config,{});
       });
     });
   }

@@ -15,7 +15,7 @@ exports.get=function() {
       crypto=require('crypto'),
       fs=require('fs');
 
-
+  var context=require('./Core/server/util/jibreel.core.server.util.context').CONTEXT;
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
   var edgeFactory = require('./Mesh/base/jibreel.mesh.base.edge.factory').EDGE;
   var configHelper = require('./Mesh/helpers/jibreel.mesh.nodes.helpers.config').CONFIG_HELPER;
@@ -50,6 +50,7 @@ exports.get=function() {
     bus:eventBus,
     comparator :compartor,
     controller:controller,
-    exchange:exchange
+    exchange:exchange,
+    context : context
   }
 }

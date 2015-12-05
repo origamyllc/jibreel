@@ -42,14 +42,12 @@ module.exports = function(app,promisifier,util,Factory,edgeUtil,collectorUtil) {
     switch : function(){
       app.get('/mesh/collector/:flag', function (req, res) {
         collectorUtil.toggle(req.params.flag);
-        // toggle on the reciever too
-
         res.status(200).send("collector turned" + req.params.flag );
       })
     },
     simulate : function(){
       app.get('/mesh/simulate/temperature', function (req, res) {
-        res.status(200).send({"currentTemperatue":25,"unit":"f"})
+        res.status(200).send({"currentTemperatue":60,"unit":"f"})
       })
      }
     }

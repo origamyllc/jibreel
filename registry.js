@@ -25,6 +25,9 @@ exports.get=function() {
   var eventBus=require('./Core/server/eventBus/jibreel.core.server.eventBus').EVENT_BUS;
   var graph=require('./Mesh/base/jibreel.mesh.base.graph.factory').GRAPH;
   var compartor =require('./Mesh/nodes/compute/jibreel.mesh.nodes.compute.comparator').COMPARATOR;
+  var queue = require('./Helot/Rabbit/helot.rabbit.queue.factory').QUEUE;
+  var exchange = require('./Helot/Rabbit/helot.rabbit.exchange.factory').EXCHANGE;
+  var websocket = require('./Helot/primus/helot.primus.websocket.factory').WEBSOCKET;
 
  return {
     fractals: fractals,
@@ -45,7 +48,8 @@ exports.get=function() {
     graph:graph,
     crypto:crypto,
     bus:eventBus,
-    comparator : compartor,
-    controller:  controller
+    comparator :compartor,
+    controller:controller,
+    exchange:exchange
   }
 }

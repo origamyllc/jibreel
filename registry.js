@@ -24,6 +24,7 @@ exports.get=function() {
   var lru=require('./Core/server/cache/lru/jibreel.core.server.cache.lru.factory').LRU;
   var eventBus=require('./Core/server/eventBus/jibreel.core.server.eventBus').EVENT_BUS;
   var graph=require('./Mesh/base/jibreel.mesh.base.graph.factory').GRAPH;
+  var compartor =require('./Mesh/nodes/compute/jibreel.mesh.nodes.compute.comparator').COMPARATOR;
 
  return {
     fractals: fractals,
@@ -44,6 +45,7 @@ exports.get=function() {
     graph:graph,
     crypto:crypto,
     bus:eventBus,
-    controller:  new controller()
+    comparator : compartor,
+    controller:  controller
   }
 }

@@ -9,11 +9,10 @@ module.exports = function () {
     self.node= node;
     self.redis= registry.redis;
     self.lru =registry.lru;
-     self.getStream();
+    self.comparator = registry.comparator;
+    self.getStream();
   }
 
-
-  // to do fix the imports
   self.getStream = function(){
     self.bus.once('stream', function() {
       self.stream();
@@ -21,12 +20,10 @@ module.exports = function () {
   }
 
   self.stream = function(){
+
     self.getNode("config", function(config){
-      // self.getNode("compute",function(config){});
       self.bus.on('stream',function(data){
-        // pass the data and  field to read to the comparator
-        console.log(data);
-        console.log(config);
+          self.comparator.compare(data,config);
       });
     });
   }

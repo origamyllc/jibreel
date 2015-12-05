@@ -4,15 +4,17 @@
 
 var registry= require("../../../registry").get();
 
-var COMPARATOR = (function() {
+var COMPARATOR = (function(bus) {
 
   // our instance holder
-  var instance={};
+  var instance;
 
   function init() {
     return {
       compare : function(data,config){
-         console.log("ramos")
+        if(data.currentTemperatue === config.target_temperature_f){
+          bus.emit("event",{"message":"shit happend!"});
+        }
       }
     }
   }
@@ -28,7 +30,7 @@ var COMPARATOR = (function() {
     }
   };
 
-})();
+})(registry.bus);
 
 module.exports.COMPARATOR = COMPARATOR.getInstance();
 

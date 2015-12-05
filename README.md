@@ -19,6 +19,6 @@
 
 {"options":{"fromNode": "mesh.control.temperature", "relationship": "has-a","toNode": "mesh.temperature.config" }}
 
-// {"options":{"fromNode": "mesh.control.temperature", "relationship": "has-a","toNode": "mesh.comparator" }}
+{"options":{"fromNode": "mesh.control.temperature", "relationship": "has-a","toNode": "mesh.comparator" }}
 
 // {"options":{"fromNode": "mesh.control.temperature", "relationship": "has-a","toNode": "mesh.commute.rabbitmq" }}

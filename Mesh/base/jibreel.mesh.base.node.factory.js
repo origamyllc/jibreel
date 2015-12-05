@@ -42,7 +42,8 @@ var NODE = (function(maker,collector,controller) {
           collector.stream(node);
           break;
         case "control":
-         new controller(node);
+          var control=controller();
+          new control(node);
           break;
       }
 

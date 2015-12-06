@@ -29,6 +29,7 @@ exports.get=function() {
   var queue = require('./Helot/Rabbit/helot.rabbit.queue.factory').QUEUE;
   var exchange = require('./Helot/Rabbit/helot.rabbit.exchange.factory').EXCHANGE;
   var websocket = require('./Helot/primus/helot.primus.websocket.factory').WEBSOCKET;
+  var computeFactory = require('./Mesh/base/jibreel.mesh.nodes.compute.factory').COMPUTE;
 
  return {
     fractals: fractals,
@@ -49,10 +50,10 @@ exports.get=function() {
     graph:graph,
     crypto:crypto,
     bus:eventBus,
-    comparator :compartor,
     controller:controller,
     exchange:exchange,
     context : context,
-    base64:base64
+    base64:base64,
+    computeFactory:computeFactory
   }
 }

@@ -9,6 +9,7 @@ module.exports = function () {
     self.node= node;
     self.redis= registry.redis;
     self.lru =registry.lru;
+    self.computeFactory = refistry.computeFactory;
     self.getStream();
   }
 
@@ -22,10 +23,7 @@ module.exports = function () {
     self.getComputeNode("compute", function(computeType){
       self.getConfigNode("config", function(config){
         self.bus.on('stream',function(data){
-          // todo move to compute node factory
-          if(computeType === "comparator") {
-            registry.comparator.compare(data, config);
-          }
+          self.computeFactory.getNode(computeType,data,config)
         });
       });
     });

@@ -23,9 +23,6 @@ var GRAPH = (function(nodeFactory,redis,edgeFactory,lru) {
            return callback(result);
          })
        },
-       updateNode:function(name){
-
-       },
        deleteNode:function(name){
 
        },
@@ -42,9 +39,6 @@ var GRAPH = (function(nodeFactory,redis,edgeFactory,lru) {
          callback(edge);
        },
        readEdge:function(from,to){
-
-       },
-       updateEdge:function(from,to){
 
        },
        deleteEdge:function(from,to){

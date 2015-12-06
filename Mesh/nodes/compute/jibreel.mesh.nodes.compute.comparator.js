@@ -4,7 +4,7 @@
 
 var registry= require("../../../registry").get();
 
-var COMPARATOR = (function(bus,exchange,context) {
+var COMPARATOR = (function(bus,exchange,context,base64) {
 
   // our instance holder
   var instance;
@@ -20,16 +20,11 @@ var COMPARATOR = (function(bus,exchange,context) {
   function init() {
     return {
       compare : function(data,config){
-
         this.config=JSON.parse(config);
-
         if(data[options.compareField] === config[options.withField]){
-
-           // todo  create base64 encoder decoder
-
-            var header = new Buffer({"configId": this.config.id ,"deviceId":context.getContext().deviceId },"base64");
-            var message = new Buffer({"message": options.message},"base64");
-            bus.emit("event",{"header":header,"message":message});
+            var header = base64.encode({"configId": this.config.id ,"deviceId":context.getContext().deviceId });
+            var message = base64.encode({"message": options.message});
+           // bus.emit("event",{"header":header,"message":message});
         }
       }
     }
@@ -46,7 +41,7 @@ var COMPARATOR = (function(bus,exchange,context) {
     }
   };
 
-})(registry.bus,registry.exchange,registry.context);
+})(registry.bus,registry.exchange,registry.context,registry.base64);
 
 module.exports.COMPARATOR = COMPARATOR.getInstance();
 

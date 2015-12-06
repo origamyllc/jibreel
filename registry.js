@@ -15,6 +15,7 @@ exports.get=function() {
       crypto=require('crypto'),
       fs=require('fs');
 
+  var base64 = require('./Core/server/util/jibreel.core.server.util.base64').BASE64;
   var context=require('./Core/server/util/jibreel.core.server.util.context').CONTEXT;
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
   var edgeFactory = require('./Mesh/base/jibreel.mesh.base.edge.factory').EDGE;
@@ -51,6 +52,7 @@ exports.get=function() {
     comparator :compartor,
     controller:controller,
     exchange:exchange,
-    context : context
+    context : context,
+    base64:base64
   }
 }

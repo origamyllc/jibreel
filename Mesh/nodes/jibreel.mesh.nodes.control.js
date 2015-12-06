@@ -9,7 +9,6 @@ module.exports = function () {
     self.node= node;
     self.redis= registry.redis;
     self.lru =registry.lru;
-    self.comparator = registry.comparator;
     self.getStream();
   }
 
@@ -20,26 +19,44 @@ module.exports = function () {
   }
 
   self.stream = function(){
-    self.getNode("config", function(config){
-      self.bus.on('stream',function(data){
-          self.comparator.compare(data,config,{});
+    self.getComputeNode("compute", function(computeType){
+      self.getConfigNode("config", function(config){
+        self.bus.on('stream',function(data){
+          // todo move to compute node factory
+          if(computeType === "comparator") {
+            registry.comparator.compare(data, config);
+          }
+        });
       });
     });
   }
 
-
-  self.getNode = function(type,callback){
+  self.getConfigNode = function(type,callback){
     self.lru.get(self.node.fullName, function (adjacentNodes) {
-      adjacentNodes.forEach(function (adjacentNode) {
-        if (adjacentNode.split(".").indexOf(type) !== -1) {
-          self.redis.get(adjacentNode, function (config) {
-            callback(config);
-          });
-        }
-      });
+      if(typeof adjacentNodes !== "undefined") {
+        adjacentNodes.forEach(function (adjacentNode) {
+          if (adjacentNode.split(".").indexOf(type) !== -1) {
+            self.redis.get(adjacentNode, function (config) {
+              return callback(config);
+            });
+          }
+        });
+      }
     });
   }
 
+  self.getComputeNode = function(type,callback){
+    self.lru.get(self.node.fullName, function (adjacentNodes) {
+      if(typeof adjacentNodes !== "undefined") {
+        adjacentNodes.forEach(function (adjacentNode) {
+          var array = adjacentNode.split(".");
+          if (array.indexOf(type) !== -1) {
+            return callback(array[array.length - 1]);
+          }
+        });
+      }
+    });
+  }
 
   return deviceControllerNode;
 }

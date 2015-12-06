@@ -25,7 +25,7 @@ exports.utils=function(app,promisifier,db,context) {
 
   ConfigUtils.save = function (node){
       return promisifier.when(ConfigUtils.persist(node)).then(
-        console.log("sucsessfully saved the node with id : node--" + node.id + " !")
+         console.log("sucsessfully saved the node"+ JSON.stringify(node))
       ).catch(
         function (reason) {
           console.log('Handle rejected promise (' + reason + ') here.');

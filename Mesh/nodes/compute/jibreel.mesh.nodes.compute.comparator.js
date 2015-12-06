@@ -9,12 +9,26 @@ var COMPARATOR = (function(bus,exchange,context) {
   // our instance holder
   var instance;
 
+  //todo  move to compute options node
+
+  var options ={
+    "compareField":"currentTemperatue",
+    "withField":"target_temperature_f",
+    "message":"temperature is same"
+  };
+
   function init() {
     return {
-      compare : function(data,config,options){
-        if(data.currentTemperatue === config.target_temperature_f){
-            var header = new Buffer({"configId":config.id ,"deviceId":context.getContext().deviceId },"base64");
-            var message = new Buffer({"message":"temperature is equal !"},"base64");
+      compare : function(data,config){
+
+        this.config=JSON.parse(config);
+
+        if(data[options.compareField] === config[options.withField]){
+
+           // todo  create base64 encoder decoder
+
+            var header = new Buffer({"configId": this.config.id ,"deviceId":context.getContext().deviceId },"base64");
+            var message = new Buffer({"message": options.message},"base64");
             bus.emit("event",{"header":header,"message":message});
         }
       }

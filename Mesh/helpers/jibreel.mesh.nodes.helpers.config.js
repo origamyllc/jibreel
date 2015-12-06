@@ -28,7 +28,7 @@ var CONFIG_HELPER = (function(base,fractals,path,fs,collector) {
           self.node = fractals.extend(nodes["base"](options),nodes["temperature"](options));
           break;
         case "smoke-alarm":
-          self.node = nodes["base"];
+          self.node = fractals.execute(nodes["base"](options));
           break;
         case "device":
           self.node = fractals.extend(function (){this.db="sql",this.schema="device"},nodes["device"](options));

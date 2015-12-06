@@ -20,6 +20,7 @@ exports.utils=function(app,promisifier,db,context) {
     else if(node.fullName ==='static'){
       throw "Please pass the full name as an option !"
     }
+
     return node;
   }
 

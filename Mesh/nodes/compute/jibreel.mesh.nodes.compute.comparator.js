@@ -7,24 +7,18 @@ var registry= require("../../../registry").get();
 var COMPARATOR = (function(bus,exchange,context,base64) {
 
   // our instance holder
-  var instance;
-
-  //todo  move to compute options node
-
-  var options ={
-    "compareField":"currentTemperatue",
-    "withField":"target_temperature_f",
-    "message":"temperature is same"
-  };
+  var instance,metadata ={};
 
   function init() {
     return {
       compare : function(data,config){
         this.config=JSON.parse(config);
-        if(data[options.compareField] === config[options.withField]){
+        metadata=this.config.metadata;
+
+        if(typeof metadata !== "undefined" && data[metadata.monitor] === config[metadata.against]){
             var header = base64.encode({"configId": this.config.id ,"deviceId":context.getContext().deviceId });
-            var message = base64.encode({"message": options.message});
-           // bus.emit("event",{"header":header,"message":message});
+            var message = base64.encode({"message": metadata.successMessage});
+            bus.emit("event",{"header":header,"message":message,"responseCode":200});
         }
       }
     }

@@ -11,14 +11,12 @@ var PUBLISH_SUBSCRIBE = (function(bus,exchange) {
 
   function init() {
      bus.on("event",function(data){
-         console.log(data);
-        exchange.publish("jibreel.exchange.home",data);
+        console.log(data);
+        exchange.publish("jibreel.thermostat",data);
      });
   }
 
   return {
-    // Get the Singleton instance if one exists
-    // or create one if it doesn't
     getInstance: function() {
       if (!instance) {
         instance = init();

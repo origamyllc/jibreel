@@ -15,6 +15,7 @@ exports.get=function() {
       crypto=require('crypto'),
       fs=require('fs');
 
+  var computeFactory = require('./Mesh/base/jibreel.mesh.nodes.compute.factory').COMPUTE;
   var base64 = require('./Core/server/util/jibreel.core.server.util.base64').BASE64;
   var context=require('./Core/server/util/jibreel.core.server.util.context').CONTEXT;
   var nodeFactory = require('./Mesh/base/jibreel.mesh.base.node.factory').NODE;
@@ -29,8 +30,7 @@ exports.get=function() {
   var queue = require('./Helot/Rabbit/helot.rabbit.queue.factory').QUEUE;
   var exchange = require('./Helot/Rabbit/helot.rabbit.exchange.factory').EXCHANGE;
   var websocket = require('./Helot/primus/helot.primus.websocket.factory').WEBSOCKET;
-  var computeFactory = require('./Mesh/base/jibreel.mesh.nodes.compute.factory').COMPUTE;
-
+  var publishSubscribe =require('./Mesh/nodes/commute/jibreel.mesh.nodes.commute.rabbitmq').PUBLISH_SUBSCRIBE;
  return {
     fractals: fractals,
     make: configHelper,
@@ -50,10 +50,12 @@ exports.get=function() {
     graph:graph,
     crypto:crypto,
     bus:eventBus,
+    comparator :compartor,
     controller:controller,
     exchange:exchange,
     context : context,
     base64:base64,
-    computeFactory:computeFactory
+    computeFactory:computeFactory,
+    publishSubscribe:publishSubscribe
   }
 }

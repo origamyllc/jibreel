@@ -8,8 +8,10 @@ var EVENT_BUS = (function() {
   var events = require("events");
   var EventEmitter = require("events").EventEmitter;
 
+
   function init() {
      var ee = new EventEmitter();
+     ee.setMaxListeners(0);
      return ee;
   }
 

@@ -9,7 +9,7 @@ module.exports = function () {
     self.node= node;
     self.redis= registry.redis;
     self.lru =registry.lru;
-    self.computeFactory = refistry.computeFactory;
+    self.computeFactory = registry.computeFactory;
     self.getStream();
   }
 
@@ -23,7 +23,10 @@ module.exports = function () {
     self.getComputeNode("compute", function(computeType){
       self.getConfigNode("config", function(config){
         self.bus.on('stream',function(data){
-          self.computeFactory.getNode(computeType,data,config)
+          var message=self.computeFactory.getNode(computeType,data,config);
+          if(typeof message !== "undefined") {
+            bus.emit("event", message);
+          }
         });
       });
     });

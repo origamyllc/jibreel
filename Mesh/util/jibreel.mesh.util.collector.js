@@ -21,7 +21,7 @@ exports.utils=function(promisifier,http) {
 
   CollectorUtils.validate = function(node){
     return promisifier.when(CollectorUtils.validateNode(node)).then(
-      console.log("sucsessfully saved the node with id : node--" + node.id + " !")
+       console.log("sucsessfully saved the node" + JSON.stringify(node) )
     ).catch(
       function (reason) {
         console.log('Handle rejected promise (' + reason + ') here.');
